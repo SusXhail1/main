@@ -25,12 +25,22 @@ def encode(password):
             encoded_password+= "9"
     return encoded_password
 
-
-#todo: implement Decoding function
-
+# Added by partner: Nicholas Cuc
+def decode(encoded_password):
+    decoded_password = ""
+    for digit in encoded_password:
+        # Shift each digit back by 3
+        decoded_password += str((int(digit) - 3) % 10)
+    return decoded_password
 
 
 if __name__== '__main__':
+    """Comment by Nicholas: put whats under here in a main function like 
+    def main():
+        code
+    Then whats ran is main() after if __name__== '__main__':
+    """
+    encoded_password = None
     go= True
     while go: #main loop
         print('Menu')
@@ -38,12 +48,20 @@ if __name__== '__main__':
         print('1. Encode')
         print('2. Decode')
         print('3. Quit')
-        option= input('Please enter an option:')
+        print()
+        option= input('Please enter an option: ')
         if option== '1': #encoder
-            pw= input("Please enter your password to encode:")
+            pw= input("Please enter your password to encode: ")
             encoded_password= encode(pw)
             print('Your password has been encoded and stored!')
+            print()
         if option=='2': #decoder
-             #decoding stuff
+            if encoded_password is None:    # If no password encoded, tell user to enter a password to option 1
+                print("No encoded password found. Please encode a password first.")
+                print()
+            else:   # Decodes password and prints out encoded password and original password
+                decoded_password = decode(encoded_password)
+                print(f"The encoded password is {encoded_password}, and the original password is {decoded_password}.")
+                print()
         if option=="3": #quit function
             quit()
